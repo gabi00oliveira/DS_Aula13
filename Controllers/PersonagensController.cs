@@ -14,11 +14,13 @@ namespace RpgApi.Controllers
     [Route("[controller]")]
     public class PersonagensController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly DataContext _context; 
+        private readonly IConfiguration _configuration;
 
-        public PersonagensController(DataContext context)
+        public PersonagensController(DataContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         [HttpGet("{id}")] //Buscar pelo id
@@ -30,7 +32,7 @@ namespace RpgApi.Controllers
                     .TB_PERSONAGENS.Include(ar => ar.Arma) // Carrega a propriedade Arma do objeto p
                     .Include(ph => ph.PersonagemHabilidades)
                     .ThenInclude(h => h.Habilidade) //Carrega a lista de personagensHabilidade de p
-                    .FirstOrDefaultAsync(pBusca => pBusca.Id == id);
+                    .FirstOrDefaultAsync(pBusca => pBusca.Id == id); 
 
                 return Ok(p);
             }
