@@ -15,10 +15,12 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text; 
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace RpgApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class UsuariosController : Controller
